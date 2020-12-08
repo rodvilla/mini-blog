@@ -12,5 +12,8 @@
             </div>
             @endforeach
         </div>
+        <div class="pb-8">
+            {{ $posts->links() }}
+        </div>
     </div>
 </x-app-layout>

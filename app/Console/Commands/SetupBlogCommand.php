@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Actions\ClearPaginationCache;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Console\Command;
@@ -46,5 +47,7 @@ class SetupBlogCommand extends Command
         $user->posts()->saveMany(
             Post::factory()->count(3)->make()
         );
+
+        new ClearPaginationCache;
     }
 }

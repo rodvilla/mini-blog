@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Actions\ClearPaginationCache;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
@@ -56,5 +57,7 @@ class ImportPostsJob implements ShouldQueue
             ]);
             $admin->posts()->save($post);
         }
+
+        new ClearPaginationCache;
     }
 }

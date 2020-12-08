@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreatePostRequest;
-use App\Models\Post;
 use Carbon\Carbon;
+use App\Models\Post;
+use App\Actions\ClearPaginationCache;
+use App\Http\Requests\CreatePostRequest;
 
 class PostsController extends Controller
 {
@@ -44,6 +45,8 @@ class PostsController extends Controller
         $post->published_at = Carbon::now();
         
         auth()->user()->posts()->save($post);
+
+        new ClearPaginationCache;
 
         return redirect()->route('posts.index')
             ->with('status', 'Post saved succesfully!');

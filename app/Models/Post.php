@@ -14,6 +14,10 @@ class Post extends Model
 
     protected $guarded = [];
 
+    public static $pagesToCache = 10;
+
+    public static $itemsPerPage = 5;
+
     /**
      * The attributes that should be cast to native types.
      *
@@ -44,6 +48,11 @@ class Post extends Model
         return $query->orderByDesc('published_at');
     }
 
+    /**
+     * Mutator to get the published date in a nicer format
+     *
+     * @return string
+     */
     public function getPublishDateAttribute()
     {
         return $this->published_at->toFormattedDateString();
